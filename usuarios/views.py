@@ -55,7 +55,5 @@ class RegistroView(View):
             messages.success(request, 'Registro bem-sucedido. Faça o login para continuar.')
             return redirect(self.success_url)
 
-        return render(request, self.template_name, {'form': form, 'user_role': request.user.tipo_usuario})
-
 
 logout_view = DjangoLogoutView.as_view(next_page=reverse_lazy('usuarios:login'))
