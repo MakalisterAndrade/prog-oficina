@@ -1,10 +1,49 @@
 {% extends 'main.html' %}
 
 {% block content %}
-  <h2>Registro</h2>
+  <div class="row mb-4 align-items-center">
+    <div class="col">
+      <strong class="fs-3">Criar conta</strong>
+    </div>
+  </div>
   <form method="post" action="{% url 'usuarios:registro' %}">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Registrar</button>
+      {{ form.errors }}
+    <div class="form-group">
+        <div class="mb-3">
+            {{ form.tipo_usuario }}
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="username" placeholder="Usuário" class="form-control mb-2">
+        </div>
+
+        <div class="form-group">
+            <input type="password" name="password1" placeholder="Senha" class="form-control mb-2">
+        </div>
+
+        <ul>
+            <li>
+                Sua senha não pode ser muito parecida com o resto das suas informações pessoais.
+            </li>
+
+            <li>
+                Sua senha precisa conter pelo menos 8 caracteres.
+            </li>
+
+            <li>
+                Sua senha não pode ser uma senha comumente utilizada.
+            </li>
+
+            <li>
+                Sua senha não pode ser inteiramente numérica.
+            </li>
+        </ul>
+
+        <div class="form-group">
+            <input type="password" name="password2" placeholder="Confirmar senha" class="form-control mb-2">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Criar conta</button>
   </form>
 {% endblock %}
