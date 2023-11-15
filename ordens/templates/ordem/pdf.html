@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório de Ordens de Serviço</title>
+  <style>
+    table {
+  border: 1px solid black;
+  width: 100%;
+  margin-bottom: 10px;
+}
+  </style>
+</head>
+<body>
+
+<h1>Relatório de Ordens de Serviço</h1>
+
+{% if ordens|length > 0 %}
+
+{% for ordem in ordens %}
+<table>
+  <thead>
+    <tr>
+      <th>nº {{ ordem.id }} </th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in ordem.itens.all %}
+      <tr>
+        <td>{{ item.descricao }}</td>
+        <td >R$ {{ item.preco }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+  <tfoot>
+    <tr>
+      <td>
+        {{ ordem.veiculo.descricao }} entregue em {{ ordem.entrega|date:"d/m" }} para {{ ordem.veiculo.cliente.pessoa.nome }}
+      </td>
+      <td>R$ {{ ordem.total }}</td>
+    </tr>
+  </tfoot>
+</table>
+{% endfor %}
+
+{% else %}
+
+Sem ordens de serviço cadastradas.
+
+{% endif %}
+
+</body>
+</html>

@@ -16,6 +16,7 @@ from .views import (
     OrdemCreateView,
     OrdemUpdateView,
     OrdemDeleteView,
+    OrdemPdfView
 )
 
 urlpatterns = [
@@ -38,6 +39,7 @@ urlpatterns = [
     path('veiculos/excluir/<str:placa>/', VeiculoDeleteView.as_view(), name='veiculo_delete'),
 
     # Ordens
+    path("ordens/pdf/", OrdemPdfView.as_view(), name="ordem_pdf"),
     path('ordens/', OrdemReadView.as_view(), name='ordem_list'),
     path('ordens/criar/', OrdemCreateView.as_view(), name='ordem_criar'),
     path('ordens/editar/<int:pk>/', OrdemUpdateView.as_view(), name='ordem_atualizar'),
