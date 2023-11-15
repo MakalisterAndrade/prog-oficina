@@ -109,7 +109,7 @@
         <p class="lead text-muted">Nosso compromisso é fornecer soluções de software avançadas que impulsionem a produtividade e a eficiência da sua oficina automotiva, maximizando a rentabilidade a longo prazo.
         </p>
         <a href="{% url 'usuarios:logout' %}?next={% url 'usuarios:registro' %}" class="btn btn-primary my-2">Criar conta</a>
-        <a href="{% url 'usuarios:login' %}" class="btn btn-secondary my-2">Entrar</a>
+        <a href="{% url 'usuarios:logout' %}?next={% url 'usuarios:login' %}" class="btn btn-secondary my-2">Entrar</a>
         </p>
       </div>
     </div>

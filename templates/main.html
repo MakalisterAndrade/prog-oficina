@@ -120,16 +120,16 @@
             </a>
           </li>
       
-          <li>
-            <hr>
-          </li>
           {% endif %}
+          <hr>
+          {% if user.is_authenticated %}
           <li>
             <a href="{% url 'chat_list' %}" class="nav-link {% if 'chat' in request.path %} active {% else %} link-body-emphasis {% endif %}">
               <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#chat"/></svg>
               Chat
             </a>
           </li>
+          {% endif %}
         </ul>
 
 
