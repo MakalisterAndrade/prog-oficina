@@ -126,20 +126,20 @@
 
         </ul>
 
-
+        {% if user.is_authenticated %}
         <div class="dropdown mx-auto">
 
           <a href="#" class="d-flex align-items-center justify-content-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                   <svg class="bi pe-none me-2" width="32" height="32"><use xlink:href="#people-circle"/></svg>
-            Usuário
+            Usuário: {{ request.user.username }}
           </a>
 
           <ul class="dropdown-menu text-small shadow">
-            <li><a class="dropdown-item" href="#">Sair</a></li>
+            <li><a class="dropdown-item" href="{% url 'usuarios:logout' %}">Sair</a></li>
           </ul>
 
         </div>
-
+        {% endif %}
       </div>
 
       <div class="col mt-5 ms-5 me-5">

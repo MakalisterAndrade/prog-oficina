@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pessoas',
     'ordens',
+    'usuarios'
 ]
 
 MIDDLEWARE = [
@@ -101,6 +102,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'usuarios.backends.UsuarioBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -130,3 +135,9 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'usuarios.Usuario'
+LOGIN_URL = 'usuarios:login'
+LOGOUT_URL = 'usuarios:logout'
+LOGIN_REDIRECT_URL = 'clientes'
+

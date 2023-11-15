@@ -1,23 +1,25 @@
-from ordens.models import Peca, Servico, Veiculo, OrdemDeServico, Item
-
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, FormView, DeleteView
 from django.views.generic.list import ListView
-from .forms import VeiculoForm, PecasForm, ServicosForm, OrdemForm
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django.views.generic import FormView, DeleteView
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from .models import Peca, Servico, Veiculo, OrdemDeServico, Item
+from .forms import VeiculoForm, PecasForm, ServicosForm, OrdemForm
 
+class LoginRequiredMixin:
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
-class PecasReadView(ListView):
-
+class PecasReadView(LoginRequiredMixin, ListView):
     model = Peca
     ordering = ['-item_id']
     context_object_name = 'pecas'
     template_name = 'pecas/list.html'
     paginate_by = 10
 
-
-class PecasCreateView(FormView):
+class PecasCreateView(LoginRequiredMixin, FormView):
     form_class = PecasForm
     template_name = 'pecas/create.html'
     success_url = '/pecas/'
@@ -40,8 +42,7 @@ class PecasCreateView(FormView):
         print(form.errors)
         return super().form_invalid(form)
 
-
-class PecasUpdateView(FormView):
+class PecasUpdateView(LoginRequiredMixin, FormView):
     form_class = PecasForm
     template_name = 'pecas/edit.html'
     success_url = '/pecas/'
@@ -59,7 +60,6 @@ class PecasUpdateView(FormView):
         return context
 
     def form_valid(self, form):
-
         descricao = form.cleaned_data['descricao']
         preco = form.cleaned_data['preco']
 
@@ -79,23 +79,19 @@ class PecasUpdateView(FormView):
         print(form.errors)
         return super().form_invalid(form)
 
-
-class PecasDeleteView(DeleteView):
+class PecasDeleteView(LoginRequiredMixin, DeleteView):
     model = Peca
     template_name = 'pecas/delete.html'
     success_url = reverse_lazy("pecas_list")
 
-
-class ServicosReadView(ListView):
-
+class ServicosReadView(LoginRequiredMixin, ListView):
     model = Servico
     ordering = ['-item_id']
     context_object_name = 'servicos'
     template_name = 'servicos/list.html'
     paginate_by = 10
 
-
-class ServicosCreateView(FormView):
+class ServicosCreateView(LoginRequiredMixin, FormView):
     form_class = ServicosForm
     template_name = 'servicos/create.html'
     success_url = '/servicos/'
@@ -110,7 +106,7 @@ class ServicosCreateView(FormView):
         servico = Servico(item=item)
         servico.save()
 
-        messages.success(self.request, 'Serviço adicionada.')
+        messages.success(self.request, 'Serviço adicionado.')
         return super().form_valid(form)
 
     def form_invalid(self, form):
@@ -118,8 +114,7 @@ class ServicosCreateView(FormView):
         print(form.errors)
         return super().form_invalid(form)
 
-
-class ServicosUpdateView(FormView):
+class ServicosUpdateView(LoginRequiredMixin, FormView):
     form_class = ServicosForm
     template_name = 'servicos/edit.html'
     success_url = '/servicos/'
@@ -137,7 +132,6 @@ class ServicosUpdateView(FormView):
         return context
 
     def form_valid(self, form):
-
         descricao = form.cleaned_data['descricao']
         preco = form.cleaned_data['preco']
 
@@ -157,23 +151,19 @@ class ServicosUpdateView(FormView):
         print(form.errors)
         return super().form_invalid(form)
 
-
-class ServicosDeleteView(DeleteView):
+class ServicosDeleteView(LoginRequiredMixin, DeleteView):
     model = Servico
     template_name = 'servicos/delete.html'
     success_url = reverse_lazy("servicos_list")
 
-
-class VeiculosReadView(ListView):
-
+class VeiculosReadView(LoginRequiredMixin, ListView):
     model = Veiculo
     ordering = ['-placa']
     context_object_name = 'veiculos'
     template_name = 'veiculos/list.html'
     paginate_by = 10
 
-
-class VeiculoCreateView(FormView):
+class VeiculoCreateView(LoginRequiredMixin, FormView):
     form_class = VeiculoForm
     template_name = 'veiculos/create.html'
     success_url = '/veiculos/'
@@ -187,8 +177,7 @@ class VeiculoCreateView(FormView):
         messages.error(self.request, 'Erro ao cadastrar o veículo.')
         return super().form_invalid(form)
 
-
-class VeiculoUpdateView(UpdateView):
+class VeiculoUpdateView(LoginRequiredMixin, UpdateView):
     model = Veiculo
     form_class = VeiculoForm
     template_name = 'veiculos/edit.html'
@@ -196,25 +185,21 @@ class VeiculoUpdateView(UpdateView):
     slug_field = 'placa'
     slug_url_kwarg = 'placa'
 
-
-class VeiculoDeleteView(DeleteView):
+class VeiculoDeleteView(LoginRequiredMixin, DeleteView):
     model = Veiculo
     template_name = 'veiculos/delete.html'
     success_url = reverse_lazy("veiculos_list")
     slug_field = 'placa'
     slug_url_kwarg = 'placa'
 
-
-class OrdemReadView(ListView):
-
+class OrdemReadView(LoginRequiredMixin, ListView):
     model = OrdemDeServico
     ordering = ['-emitida']
     context_object_name = 'ordens'
     template_name = 'ordem/list.html'
     paginate_by = 10
 
-
-class OrdemCreateView(FormView):
+class OrdemCreateView(LoginRequiredMixin, FormView):
     form_class = OrdemForm
     template_name = 'ordem/create.html'
     success_url = '/ordens/'
@@ -228,8 +213,7 @@ class OrdemCreateView(FormView):
         messages.error(self.request, 'Erro ao cadastrar a Ordem de Serviço.')
         return super().form_invalid(form)
 
-
-class OrdemUpdateView(UpdateView):
+class OrdemUpdateView(LoginRequiredMixin, UpdateView):
     model = OrdemDeServico
     form_class = OrdemForm
     template_name = 'ordem/edit.html'
@@ -237,8 +221,7 @@ class OrdemUpdateView(UpdateView):
     slug_field = 'ordem'
     slug_url_kwarg = 'ordem'
 
-
-class OrdemDeleteView(DeleteView):
+class OrdemDeleteView(LoginRequiredMixin, DeleteView):
     model = OrdemDeServico
     template_name = 'ordem/delete.html'
     success_url = reverse_lazy("ordem_list")

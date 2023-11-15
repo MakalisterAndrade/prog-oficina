@@ -22,6 +22,7 @@ from oficina.views import IndexView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name='index'),
+    path('usuarios/', include('usuarios.urls', namespace='usuarios')),
     path('', include('pessoas.urls')),
     path('', include('ordens.urls'))
 ]

@@ -6,7 +6,6 @@ class ClienteForm(forms.Form):
 
     nome = forms.CharField(max_length=255)
     telefone = forms.CharField(max_length=15)
-
     cep = forms.IntegerField()
     rua = forms.CharField(max_length=255)
     bairro = forms.CharField(max_length=255)

@@ -2,7 +2,8 @@
 /shelf/
 /workspace.xml
 .idea/
-blog.sqlite3
 ordens/migrations
 pessoas/migrations
+usuarios/migrations
 db.sqlite3
+venv
