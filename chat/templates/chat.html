@@ -1,0 +1,52 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="row mb-4 align-items-center">
+  <div class="col">
+    <strong class="fs-3">Chat de Suporte</strong>
+  </div>
+</div>
+
+    <div id="messages_list">
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    <form id="send-message" method="post">
+        {% csrf_token %}
+        <input type="text" name="message" placeholder="Mensagem" class="form-control mb-2">
+        <input type="submit" value="Enviar" class="btn btn-primary">
+    </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(function() {
+            // Obtém a lista de mensagens
+
+            // Envia uma mensagem
+            $('#send-message').on('submit', function(e) {
+                e.preventDefault();
+
+                // Obtém os dados do formulário
+                var recipient = ''
+                var message = $(this).find('input[name="message"]').val();
+
+                // Envia a mensagem ao servidor
+                $.post('/chat/send-message', {
+                    recipient: recipient,
+                    message: message,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                }, function(data) {
+                    $('#send-message input[name="message"]').val('');
+                    var box = document.getElementById("messages_list");
+                    var p = document.createElement("p");
+                    var sender = data['messages'][0]['sender'];
+                    var message = data['messages'][0]['message'];
+                    p.innerText = sender + ': ' + message;
+                    box.appendChild(p);
+                });
+            });
+        });
+    </script>
+
+{% endblock content %}

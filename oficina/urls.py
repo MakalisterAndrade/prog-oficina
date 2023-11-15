@@ -24,5 +24,6 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('usuarios/', include('usuarios.urls', namespace='usuarios')),
     path('', include('pessoas.urls')),
-    path('', include('ordens.urls'))
+    path('', include('ordens.urls')),
+    path('', include('chat.urls'))
 ]
