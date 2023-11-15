@@ -15,8 +15,11 @@
     <strong class="fs-3">Ordens de Serviço</strong>
   </div>
   <div class="col">
-    <a href="{% url 'ordem_criar' %}" class="btn btn-primary float-end">
+    <a href="{% url 'ordem_criar' %}" class="btn btn-primary float-end ms-3">
       Adicionar</a>
+    </a>
+    <a href="{% url 'ordem_pdf' %}" class="btn btn-secondary float-end ">
+      Exportar relatório</a>
     </a>
   </div>
 </div>

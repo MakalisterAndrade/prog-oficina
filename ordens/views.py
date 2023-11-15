@@ -6,6 +6,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from .models import Peca, Servico, Veiculo, OrdemDeServico, Item
 from .forms import VeiculoForm, PecasForm, ServicosForm, OrdemForm
+from django.views import View
 
 
 from .utils import GeraPdfMixin
@@ -16,7 +17,7 @@ class OrdemPdfView(View, GeraPdfMixin):
     def get(self, request):
         ordens = OrdemDeServico.objects.all()
         ctx = {'ordens': ordens}
-        return self.render_to_pdf('pdf.html', ctx)
+        return self.render_to_pdf('ordem/pdf.html', ctx)
     
 class LoginRequiredMixin:
     @method_decorator(login_required)
