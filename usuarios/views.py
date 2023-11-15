@@ -40,20 +40,22 @@ class RegistroView(View):
         if form.is_valid():
             user = form.save()
 
-
             tipo_usuario = form.cleaned_data.get('tipo_usuario')
-            user_role = tipo_usuario  # Defina user_role diretamente com tipo_usuario
+            user_role = tipo_usuario  
 
             try:
                 group, created = Group.objects.get_or_create(name=tipo_usuario)
                 user.groups.add(group)
             except Group.DoesNotExist:
                 messages.error(request, 'Group does not exist for tipo_usuario: {}'.format(tipo_usuario))
+                return render(request, self.template_name, {'form': form})
             except Exception as e:
                 messages.error(request, 'An error occurred: {}'.format(str(e)))
+                return render(request, self.template_name, {'form': form})
 
             messages.success(request, 'Registro bem-sucedido. Faça o login para continuar.')
             return redirect(self.success_url)
 
+        return render(request, self.template_name, {'form': form})
 
 logout_view = DjangoLogoutView.as_view(next_page=reverse_lazy('usuarios:login'))
