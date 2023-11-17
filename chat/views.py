@@ -3,12 +3,14 @@ from django.http import JsonResponse
 
 from .models import Message
 
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def chat_view(request):
     messages = Message.objects.all().order_by('-created_at')
     return render(request, 'chat.html', {'messages': messages})
 
-
+@login_required
 def send_message(request):
     sender = request.user.username
     recipient = request.POST.get('recipient')
