@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -92,11 +93,11 @@
     <div class="container">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
           <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-            <span class="fs-4 fw-bold">Oficina</span>
+            <span class="fs-4 fw-bold">{% trans 'Title' %}</span>
           </a>
 
           <ul class="nav nav-pills">
-            <li class="nav-item"><a href="#" class="nav-link">Quem somos</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">{% trans 'WhoWeAre' %}</a></li>
 
           </ul>
     </header>
@@ -105,11 +106,11 @@
     <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">E refez-se a manutenção automotiva.</h1>
-        <p class="lead text-muted">Nosso compromisso é fornecer soluções de software avançadas que impulsionem a produtividade e a eficiência da sua oficina automotiva, maximizando a rentabilidade a longo prazo.
+        <h1 class="fw-light">{% trans 'Call' %}</h1>
+        <p class="lead text-muted">{% trans 'SubCall' %}
         </p>
-        <a href="{% url 'usuarios:logout' %}?next={% url 'usuarios:registro' %}" class="btn btn-primary my-2">Criar conta</a>
-        <a href="{% url 'usuarios:logout' %}?next={% url 'usuarios:login' %}" class="btn btn-secondary my-2">Entrar</a>
+        <a href="{% url 'usuarios:logout' %}?next={% url 'usuarios:registro' %}" class="btn btn-primary my-2">{% trans 'CreateAccount' %}</a>
+        <a href="{% url 'usuarios:logout' %}?next={% url 'usuarios:login' %}" class="btn btn-secondary my-2">{% trans 'LoginAccount' %}</a>
         </p>
       </div>
     </div>
@@ -121,22 +122,22 @@
       <div class="col d-flex align-items-start">
 
         <div>
-          <h2>Clientes</h2>
-<p>Permita que seus clientes agendem serviços de manutenção e reparo de forma rápida e fácil. Você pode gerenciar sua agenda, confirmar horários e enviar lembretes automáticos para reduzir as faltas e os atrasos.</p>
+          <h2>{% trans 'Customer' %}</h2>
+<p>{% trans 'CustomerText' %}</p>
         </div>
       </div>
       <div class="col d-flex align-items-start">
 
         <div>
-          <h2>Veículos</h2>
-<p>Seu carro é uma parte importante da sua vida. É por isso que nos esforçamos para fornecer o melhor serviço possível para mantê-lo funcionando sem problemas. De reparos simples a grandes projetos de restauração, nossa equipe está pronta para ajudar.</p>
+          <h2>{% trans 'Vehicle' %}</h2>
+<p>{% trans 'VehicleText' %}</p>
         </div>
       </div>
       <div class="col d-flex align-items-start">
 
         <div>
-          <h2>Ordens de Serviço</h2>
-<p>Nós entendemos que seu tempo é valioso. É por isso que oferecemos um processo fácil e eficiente para agendar serviços e reparos. Nossas ordens de serviço detalhadas garantem que você saiba exatamente o que esperar e quanto tempo levará para concluir o trabalho.</p>
+          <h2>{% trans 'Order' %}</h2>
+<p>{% trans 'OrderText' %}</p>
         </div>
       </div>
     </div>
@@ -147,22 +148,22 @@
       <div class="col d-flex align-items-start">
 
         <div>
-          <h2>Peças e Serviços</h2>
-<p>Tenha uma visão completa do seu estoque de peças e serviços oferecidos, com informações atualizadas sobre a quantidade, o custo e a localização de cada item</p>
+          <h2>{% trans 'Service' %}</h2>
+<p>{% trans 'ServiceText' %}</p>
         </div>
       </div>
       <div class="col d-flex align-items-start">
 
         <div>
-          <h2>Mecânicos</h2>
-<p>Nossos mecânicos são alguns dos melhores do negócio. Com anos de experiência e treinamento especializado, eles são capazes de lidar com qualquer problema que seu carro possa ter. Eles trabalham duro para garantir que seu veículo esteja sempre em ótimas condições.</p>
+          <h2>{% trans 'Mechanic' %}</h2>
+<p>{% trans 'MechanicText' %}</p>
         </div>
       </div>
       <div class="col d-flex align-items-start">
 
         <div>
-          <h2>Equipes</h2>
-<p>Nossa equipe altamente qualificada está pronta para atender às suas necessidades de reparo e manutenção de veículos. Com anos de experiência e treinamento especializado, nossos mecânicos são capazes de lidar com qualquer problema que seu carro possa ter.</p>
+          <h2>{% trans 'Team' %}</h2>
+<p>{% trans 'TeamText' %}</p>
         </div>
       </div>
     </div>
