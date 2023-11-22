@@ -1,10 +1,10 @@
 {% extends 'main.html' %}
-
+{% load i18n %}
 
 {% block content %}
   <div class="row mb-4 align-items-center">
     <div class="col">
-      <strong class="fs-3">Login</strong>
+      <strong class="fs-3">{% trans 'LoginAccount' %}</strong>
     </div>
   </div>
 
@@ -12,16 +12,16 @@
     {% csrf_token %}
     {{ form.non_field_errors }}
     <div class="form-group">
-        <input type="text" name="username" placeholder="Usuário" class="form-control mb-2">
+        <input type="text" name="username" placeholder="{% trans 'User' %}" class="form-control mb-2">
     </div>
 
     <div class="form-group">
-        <input type="password" name="password" placeholder="Senha" class="form-control mb-3">
+        <input type="password" name="password" placeholder="{% trans 'Password' %}" class="form-control mb-3">
     </div>
 
-    <button type="submit" class="btn btn-primary">Entrar</button>
+    <button type="submit" class="btn btn-primary">{% trans 'LoginAccount' %}</button>
 
-    <a class="btn btn-secondary" href="/usuarios/registro/">Criar conta</a>
+    <a class="btn btn-secondary" href="/usuarios/registro/">{% trans 'CreateAccount' %}</a>
 
   </form>
 {% endblock %}
